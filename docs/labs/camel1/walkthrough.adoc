@@ -10,9 +10,11 @@ ifdef::env-github[]
 endif::[]
 
 [id='lab-intro']
-= Camel X - Lab1
+= AI basics - Lab1
 
 Explore, build, test and deploy a Camel X demo application using the Developer Sandbox and OpenShift Dev Spaces.
+
+Start your AI journey by learning the very basics of creating, deploying, and invoking a model.
 
 This hands-on lab is based on the following blog article in Red Hat Developers:
 
@@ -20,11 +22,11 @@ This hands-on lab is based on the following blog article in Red Hat Developers:
 
 {empty} +
 
-Assuming you have followed the article's instructions, you should be all set to get hands-on with _Camel X_ in the _OpenShift Dev Spaces_ workspace.
+Assuming you have followed the article's instructions, you should be all set to get hands-on with the basics of AI to build applications in the _OpenShift Dev Spaces_ workspace.
 
 For illustration purposes, the picture below shows what the integration end-to-end flow looks like.
 
-image::images/00-demo-end2end.png[align="center", width=80%]
+// image::images/00-demo-end2end.png[align="center", width=80%]
 
 A client invokes an OpenApi service. A _Camel_ route attends the call, translates the JSON input into XML and calls a backend service to obtain an XML response, then it's translated back to JSON before responding to the original service call.
 
@@ -33,7 +35,14 @@ A client invokes an OpenApi service. A _Camel_ route attends the call, translate
 
 [time=1]
 [id="section-one"]
-== Explore the source code
+== Create an AI workbench
+
+Try deploying this...
+
+[source,yaml,subs=]
+----
+mvn -Dspring-boot.run.profiles=dev -s configuration/settings.xml<br>
+----
 
 The _Camel_ source file `api-simple.xml` defines the entire end-to-end processing logic, which you can find in your project explorer under the path:
 

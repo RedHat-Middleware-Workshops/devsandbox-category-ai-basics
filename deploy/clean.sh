@@ -1,0 +1,1 @@
+oc get deployment,route,service,secret,pvc -o name | grep lab- | xargs oc delete
