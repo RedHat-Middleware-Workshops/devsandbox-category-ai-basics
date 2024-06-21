@@ -37,6 +37,20 @@ A client invokes an OpenApi service. A _Camel_ route attends the call, translate
 [id="section-one"]
 == Create an AI workbench
 
+Let's first start by opening Red Hat OpenShift AI in the Developer Sandbox.
+
+If you don't have yet your OpenShift Console open in a tab, follow the actions below from _VS Code_
+
+. At the top of your screen in VS Code you'll find a search bar. +
+.. Copy the command below
++
+[source,bash,subs=]
+----
+> Dev Spaces: Open OpenShift Console
+----
+.. Then, click in the search bar at the top of your VS Code window
+.. Paste the command (linux: kbd:[Ctrl+v], mac: kbd:[⌘+v]) and press kbd:[Enter]
+
 Try deploying this...
 
 [source,yaml,subs=]
