@@ -127,27 +127,27 @@ spec:
   sessionAffinity: None
   selector:
     app: minio
+# ---
+# kind: Route
+# apiVersion: route.openshift.io/v1
+# metadata:
+#   name: lab-r2-minio-api
+# spec:
+#   to:
+#     kind: Service
+#     name: lab-minio-service
+#     weight: 100
+#   port:
+#     targetPort: api
+#   wildcardPolicy: None
+#   tls:
+#     termination: edge
+#     insecureEdgeTerminationPolicy: Redirect
 ---
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: lab-r2-minio-api
-spec:
-  to:
-    kind: Service
-    name: lab-minio-service
-    weight: 100
-  port:
-    targetPort: api
-  wildcardPolicy: None
-  tls:
-    termination: edge
-    insecureEdgeTerminationPolicy: Redirect
----
-kind: Route
-apiVersion: route.openshift.io/v1
-metadata:
-  name: lab-r1-minio-ui
+  name: lab-minio-ui
 spec:
   to:
     kind: Service
