@@ -299,7 +299,7 @@ The most notable parts of the execution are:
 
 . The model is persisted to disk (to be used in the next chapter).
 +
-NOTE: You'll find in your workbench folder, a new `models` folder where your base model has been persisted.
+NOTE: You'll find in your workbench folder, a new [📁 `models`] folder where your base model has been persisted.
 
 {empty} +
 
@@ -487,8 +487,7 @@ persistentvolumeclaim/minio-pvc created
 secret/minio-secret created
 deployment.apps/minio created
 service/minio-service created
-route.route.openshift.io/r2-minio-api created
-route.route.openshift.io/r1-minio-ui created
+route.route.openshift.io/minio-ui created
 ----
 
 {empty} +
@@ -697,13 +696,13 @@ You should obtain the following output:
 {empty} +
 
 [type=verification]
-Did you obtain the same XML message as shown above?
+Did you obtain the same JSON message as shown above?
 
 [type=verificationSuccess]
-You've successfully tested the stub deployed in the sandbox !!
+You've successfully run an inference against the Model Server !!
 
 [type=verificationFail]
-Inspect in the stub logs to investigate possible causes of failure.
+Review the lab instructions and try again.
 
 
 [time=4]
@@ -781,7 +780,7 @@ Execute the code by selecting from the menu:
 +
 [NOTE]
 --
-Be patient, the training process should take between 2-4 minutes.
+Be patient, the training process should take between 3-5 minutes.
 
 The upper right corner shows a progress wheel. Wait until finished (idle state):
 
@@ -878,8 +877,8 @@ The script needs to be updated to read, not the banana image, but the green tea 
 Edit the script ensuring the image loaded is `bali-tea`, as shown below:
 
 ----
-image=./samples/bali-tea.jpeg
 # image=./samples/banana.jpeg
+image=./samples/bali-tea.jpeg
 ----
 
 {blank}
