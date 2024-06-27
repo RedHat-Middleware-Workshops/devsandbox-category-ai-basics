@@ -90,7 +90,7 @@ image::images/03-ai-create-workbench.png[width=90%]
 
 Now, enter the following field values to create your AI workbench.
 
-- Name: `lab-wb`
+- Name: `wb`
 - Notebook image -> Image selection: `TensorFlow`
 - Deployment size -> Container size: `Medium`
 +
@@ -483,12 +483,12 @@ oc apply -f deploy/minio.yaml
 You should see the following output:
 +
 ----
-persistentvolumeclaim/lab-minio-pvc created
-secret/lab-minio-secret created
-deployment.apps/lab-minio created
-service/lab-minio-service created
-route.route.openshift.io/lab-r2-minio-api created
-route.route.openshift.io/lab-r1-minio-ui created
+persistentvolumeclaim/minio-pvc created
+secret/minio-secret created
+deployment.apps/minio created
+service/minio-service created
+route.route.openshift.io/r2-minio-api created
+route.route.openshift.io/r1-minio-ui created
 ----
 
 {empty} +
@@ -597,9 +597,9 @@ oc apply -f deploy/tensorflow.yaml
 You should see the following output:
 +
 ----
-deployment.apps/lab-tf-server created
-service/lab-tf-server created
-route.route.openshift.io/lab-tf-server created
+deployment.apps/tf-server created
+service/tf-server created
+route.route.openshift.io/tf-server created
 ----
 
 {empty} +
@@ -608,7 +608,7 @@ The model server is configured to connect to _Minio_ and will try to read the bu
 
 From the topology view, follow the steps below to visually validate your server started successfully:
 
-. Click on the `lab-tf-server` deployment
+. Click on the `tf-server` deployment
 . Click on the view logs link.
 . Inspect the logs where you should find the following trace:
 +

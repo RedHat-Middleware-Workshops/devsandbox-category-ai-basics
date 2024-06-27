@@ -5,7 +5,7 @@
         - removeHeaders:
             pattern: "*"
         - to:
-            uri: http://lab-tf-server:8501/v1/models/redbag:predict
+            uri: http://tf-server:8501/v1/models/redbag:predict
         
         - unmarshal:
             json: {}

@@ -3,10 +3,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    app.openshift.io/connects-to: lab-minio
+    app.openshift.io/connects-to: minio
   labels:
     app: tf-server
-  name: lab-tf-server
+  name: tf-server
 spec:
   selector:
     matchLabels:
@@ -37,18 +37,18 @@ spec:
         - name: MODEL_BASE_PATH
           value: s3://production/models
         - name: S3_ENDPOINT
-          value: http://lab-minio-service:9000
+          value: http://minio-service:9000
         - name: AWS_REGION
           value: 'us-west-1'
         - name: AWS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
-              name: lab-minio-secret
+              name: minio-secret
               key: minio_root_user
         - name: AWS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
-              name: lab-minio-secret
+              name: minio-secret
               key: minio_root_password
 ---
 apiVersion: v1
@@ -56,7 +56,7 @@ kind: Service
 metadata:
   labels:
     app: tf-server
-  name: lab-tf-server
+  name: tf-server
 spec:
   ports:
   - name: http-tf-serving
@@ -74,11 +74,11 @@ apiVersion: route.openshift.io/v1
 metadata:
   labels:
     app: tf-server
-  name: lab-tf-server
+  name: tf-server
 spec:
   to:
     kind: Service
-    name: lab-tf-server
+    name: tf-server
     weight: 100
   port:
     targetPort: http-tf-serving
