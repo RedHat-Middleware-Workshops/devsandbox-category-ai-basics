@@ -38,7 +38,7 @@ A client invokes an OpenApi service. A _Camel_ route attends the call, translate
 
 [time=1]
 [id="section-one"]
-== Create an AI workbench
+== Create an OpenShift AI workbench
 
 Let's first start by opening Red Hat OpenShift AI in the Developer Sandbox.
 
@@ -50,10 +50,14 @@ To open the _OpenShift_ console, from _VS Code_ follow the actions below, as ill
 ----
 > Dev Spaces: Open OpenShift Console
 ----
++
+{blank}
 . From VS Code, click the search bar at the top of the window.
 . Paste the command:
 - Linux: kbd:[Ctrl+v] and press kbd:[Enter] 
 - Mac: kbd:[⌘+v] and press kbd:[Enter]
++
+{blank}
 . When prompted, click the button `pass:[<mark style="background-color: dodgerblue; color: white">Open</mark>]` 
 +
 image::images/01-open-openshift-console.png[width=60%]
@@ -71,7 +75,8 @@ From the OpenShift console:
 . select Red Hat OpenShift AI
 +
 image::images/02-open-openshift-ai.png[width=40%]
-
++
+{blank}
 // reset counter
 
 . From OpenShift AI, select on the left menu _Data Science Projects_
@@ -127,15 +132,20 @@ image::images/04-ai-open-workbench.png[width=90%]
 +
 {empty} +
 
-
 . Accept the **Authorize Access** options:
 +
---
-[none]
-* ☑ user:info
-* ☑ user:check-access
---
+[frame=none,grid=none]
+|===
+| ☑ user:info
+| ☑ user:check-access
+|===
 +
+// --
+// [none]
+// * ☑ user:info
+// * ☑ user:check-access
+// --
+// +
 {blank}
 +
 And click the `Allow selected permissions` button.
@@ -191,7 +201,7 @@ Review the instructions and try to spot where you might have deviated.
 
 [time=3]
 [id="section-two"]
-== Run your first AI prediction
+== Execute an inference using a base model
 
 In this section of the tutorial you'll run, from _JupyterLab_, a _Notebook_ containing code which loads an AI model and runs an inference (prediction) against it.
 
@@ -279,27 +289,33 @@ The most notable parts of the execution are:
 +
 {blank}
 
-. The highest Tensor value is extracted and matched to the `banana` label
+. The highest Tensor value is extracted and matched to the `banana` label. You should see a cell with the following output:
++
+----
+['banana']
+----
++
+{blank}
 
 . The model is persisted to disk (to be used in the next chapter).
++
+NOTE: You'll find in your workbench folder, a new `models` folder where your base model has been persisted.
 
 {empty} +
 
 === Chapter conclusions
 
-Executing a prediction was cool, but note how the illustration below highlights the _Tensor_ data that goes in and out of the model: 
-
-The illustration below highlights the _Tensor_ data that goes in and out of the model: 
+Executing a prediction was cool, but note in the illustration below the vertical arrays. These arrays are the _Tensor_ data that goes in and out of the model: 
 
 image::images/08-ai-tensor-in-out.png[width=80%, align=center]
 
 {empty} +
 
-For the process above to happen, the developer requires to convert the image into _Tensor_ data, and also to handle _Tensor_ output data before understanding the result.
+For the process above to happen, the developer requires to convert the image into _Tensor_ data, and also to handle _Tensor_ output before analysing the result.
 
-It's rather inconvenient for traditional developers having to deep dive into the _Tensor_ world in order to build their AI powered applications.
+It's rather inconvenient for traditional developers, unfamiliar with AI libraries, to deep dive into the _Tensor_ world in order to build their AI powered applications.
 
-In the next chapter you'll learn a strategy to encapsulate the complexity of handling _Tensors_ so that developers can integrate with an interface easy to talk to.
+In the next chapter you'll learn a strategy to encapsulate the complexity of handling _Tensors_ so that developers can integrate with an interface easy to work with.
 
 {empty} +
  
@@ -384,6 +400,10 @@ image::images/11-ai-notebook-wheel.png[width=40%]
 +
 {blank}
 
+The notebook includes a `save` operation to persist the new model+signature on disk.
+
+NOTE: You'll find in your models folder a new directory called `redbag/1` (model's name/version).
+
 When done, inspect the last output cell of your notebook. It should show the following result:
 
 [subs="verbatim,quotes"]
@@ -392,13 +412,14 @@ When done, inspect the last output cell of your notebook. It should show the fol
 ----
 
 [NOTE]
-The signature has post-processed the result and converted the output tensor data, from 1000 probability values, to just the highest one and its matching label (banana, 0.975945)
+Signatures can also include post-processing logic. Our signature covert the output tensor, from 1000 probability values, to just the highest one and its matching label (banana, 0.975945).
+
 
 {empty} +
 
 
 [type=verification]
-Did your execution predict a banana?
+Did your execution predict a `banana`?
 
 [type=verificationSuccess]
 Well done, you're ready to deploy this model !!
@@ -409,22 +430,24 @@ Inspect in the cell outputs to investigate the possible causes of failure.
 
 [time=3]
 [id="section-four"]
-== Deploy and test the model
+== Run a Model Server
 
-The previous task showed how to encapsulate tensor complexity and expose instead and easy to consume interface.
+The previous task showed how to hide tensor complexity and expose it as an easy to consume interface.
 
-Next, you will complete the encapsulation by deploying the model in a Model Server. Below you have a list of some clear benefits:
+Next, you will complete the encapsulation by deploying the model in a Model Server. +
+Below are listed some of the benefits of running Model servers:
 
-- Model servers manage different models, versions and hot-deploys.
-- Model servers can scale as needed to respond to demand.
-- Separation of concerns is preserved by separating applications from 
-inferencing.
+- They can run multiple models and manage versions and hot-deployments.
+- They can scale as needed to respond to traffic demand.
+- Separation of concerns is preserved by keeping applications away from the inferencing engine.
+
+{empty} +
 
 The next set of actions will help you to:
 
-. Setup S3 storage and push our model.
+. Setup S3 storage
+. Push the model to S3.
 . Deploy a Model Server.
-. Run an inference against our model.
 
 {empty} +
 
@@ -432,7 +455,7 @@ The next set of actions will help you to:
 
 You will operate from VS Code in _DevSpaces_ to deploy what's needed.
 
-Switch back to your DevSpaces tab in your browser.
+Switch back to your _DevSpaces_ tab in your browser.
 
 You can inspect the YAML source you will deploy if you open in your editor the following file:
 
@@ -501,7 +524,7 @@ Now that your S3 bucket is ready, you can push your model into the bucket.
 
 === Push model to S3
 
-Switch to your JupyterLab environment.
+Switch to your _JupyterLab_ environment.
 
 Find and open the following Notebook definition:
 
@@ -574,42 +597,102 @@ oc apply -f deploy/tensorflow.yaml
 You should see the following output:
 +
 ----
-persistentvolumeclaim/lab-minio-pvc created
-secret/lab-minio-secret created
-deployment.apps/lab-minio created
-service/lab-minio-service created
-route.route.openshift.io/lab-r2-minio-api created
-route.route.openshift.io/lab-r1-minio-ui created
+deployment.apps/lab-tf-server created
+service/lab-tf-server created
+route.route.openshift.io/lab-tf-server created
 ----
 
 {empty} +
 
+The model server is configured to connect to _Minio_ and will try to read the bucket `production` to find models to serve. It will find our model `redbag v1` and will load it in memory and get ready to serve inference requests.
 
+From the topology view, follow the steps below to visually validate your server started successfully:
 
+. Click on the `lab-tf-server` deployment
+. Click on the view logs link.
+. Inspect the logs where you should find the following trace:
++
+----
+Successfully loaded servable version {name: redbag version: 1}
+----
+
+{blank}
+
+image::images/15-ai-tf-deployed.png[width=100%]
 
 {empty} +
 
+[type=verification]
+Did you see a trace in the server logs showing the model successfully loaded?
 
-The stub acts as the backend service that provides the XML data we need to fetch.
+[type=verificationSuccess]
+Well done, you're ready to test the model !!
+
+[type=verificationFail]
+Double check you followed the instructions as documented and try again.
+ 
+
+[time=3]
+[id="section-test-model-server"]
+== Send an inference request to the Model Server
+
+When the server starts and reads the model from S3, it automatically exposes a JSON interface that maps inputs and outputs to/from the signatures defined in the model.
+
+We can interact using the JSON interface, in a client/server manner, as applications would.
+
+The diagram below describes our targeted test.
+
+image::images/16-ai-curl-test-banana.png[width=80%,align=center]
+
+{blank}
+
+In the picture above, `curl` loads the same picture we've been using all along, and produces a JSON request with the Base64 encoded image. The server handles the request, executes the inference and returns the result, in JSON format.
+
+Let's run the test. +
+Switch back to the _JupyterLab_ environment and inspect the following resource:
+
+* redbag-ai -> workbench -> `**infer.sh**`
+
+{blank}
+
+You'll find in the shell script the logic described in the diagram above.
+
+NOTE: The script includes a pipe to `jq` to beautify the JSON result.
+
+To execute the script, open a terminal as follows:
+
+. Select the `Launcher` tab in your _JupyterLab_ window
++
+[NOTE]
+If the lost your launcher tab, you can open a new one from the menu, select _File -> New Launcher_
++
+{blank}
+
+. Click on the terminal icon
+
+image::images/17-ai-jupyterlab-terminal.png[width=60%]
 
 {empty} +
 
-. Test the stub
-+
-Copy/paste the following cURL command to obtain a response from the stub:
-+
-[source, subs=]
+Copy/paste and execute the following command on your terminal:
+
+[source,console]
+--
+./infer.sh
+--
+
+{empty} +
+
+You should obtain the following output:
+
 ----
-curl -s \
--H "content-type: application/xml" \
--d '' \
-http://end1:8080/camel/subscriber/details \
-| bat -pP -lxml<br>
+{
+  "predictions": [
+    "banana",
+    "0.975945"
+  ]
+}
 ----
-+
-NOTE: The cURL command above now points to the newly deployed pod, with its service `end1` listening on port 8080.
-+
-NOTE: The command also includes a pipe to colorise the XML output for better reading.
 
 {empty} +
 
@@ -625,37 +708,216 @@ Inspect in the stub logs to investigate possible causes of failure.
 
 [time=4]
 [id="section-five"]
-== Deploy and test the main service
+== Retrain the model with a custom data set
 
-With the stub already deployed, we just need to deploy the service which will integrate with the stub running under the same namespace.
+All the work you've done up until now is rooted on a base model trained with 1000 objects, among those, the famous banana.
+
+However, if only it was possible to re-train the model with our own set of objects, then we could find a good fit for a service our organisation would like to offer. Well, the good news is that it is possible.
+
+The technique to customise a model with your own set of training data is called _Transfer Learning_. Continue reading to learn more.
 
 {empty} +
 
-. Deploy the service
+=== Overview of Transfer Learning
+
+The base pre-trained model (MobileNetV2) you have used in the previous exercises can be illustrated as follows:
+
+image::images/18-ai-transfer-learning-pre-trained.png[width=80%,align=center]
+
+{blank}
+
+The model was trained with a very large data set, and is composed, to put it simply, of a set of convolution layers performing feature extraction, and a neuronal network doing the classification task.
+
+_Transfer Learning_ consists in retaining (freeze) most of the original layers, trained with millions of images, and only re-train new layers, attached to the classifier, replacing the discarded layers.
+
+The image below shows the result of applying _Transfer Learning_:
+
+image::images/19-ai-transfer-learning-re-trained.png[width=80%,align=center]
+
+{blank}
+
+Note in the picture above how most of the original model is kept as-is, only to be stripped from the last layers of the classifier, and replaced with new layers, trained with a new custom data set.
+
+{empty} +
+
+=== Retrain the model applying Transfer Learning
+
+Your _JupyterLab_ project already contains a small data set you can use to retrain the model. The aim is to train a model capable of identifying one type of tea, green tea.
+
+The training set contains 2 classes:
+
+* *Green Tea*: a collection of tea bags of green tea
+* *Other*: random pictures of other types of tea.
 +
-Ensure you run the commands below from the terminal located in the path of your main service project.
+NOTE: Remember the model returns a distribution of probabilities of all trained classes. Training a single class would always result in identifying the same class. The class `Other` allows the model to indicate an input image may not be _Green Tea_.
+
+If you feel curious you can find the training data under:
+
+📁 `/redbag-ai/dataset`
+
+{empty} +
+
+Let's get the ball rolling. +
+
+Find and open the following Notebook definition:
+
+* redbag-ai -> workbench -> `**redbag-custom.ipynb**`
+
+{blank}
+
+The notebook contains similar code compared to previous exercises, but includes the critical blocks for Transfer Learning, such as:
+
+* Load and prepare training data
+* Import and freeze the base model
+* Define and compile the new layers
+* Train the model
+* Retrain with _Data Augmentation_ (synthetic data)
+
+You'll also find typical data science blocks to render sample data and plot loss/accuracy graphs, to name a couple.
+
+Execute the code by selecting from the menu:
+
+* *Run* -> *Run All Cells*
 +
-You can now copy and paste the following command in your terminal to trigger the deployment:
+[NOTE]
+--
+Be patient, the training process should take between 2-4 minutes.
+
+The upper right corner shows a progress wheel. Wait until finished (idle state):
+
+image::images/11-ai-notebook-wheel.png[width=40%]
+--
 +
-[source, subs=]
+{blank}
+
+The notebook includes a `save` operation to persist the new customised model on disk.
+
+NOTE: You'll find in your `models/redbag` folder a new directory `2` indicating the model has evolved from version 1 to version 2.
+
+The last executed cell puts the new model to the test with a test image, using green tea. You should find the following output:
+
+[subs="verbatim,quotes"]
 ----
-mvn oc:deploy -Popenshift -s configuration/settings.xml<br>
+{'output_0': <tf.Tensor: shape=(2,), dtype=string, numpy=array([b'*tea-green*', b'*0.592239*'], dtype=object)>}
+---- 
+
+{empty} +
+
+=== Push v2 to production
+
+Now that version 2 is ready, push it to the `production` S3 bucket.
+
+Switch back to the following Notebook:
+
+* redbag-ai -> workbench -> `**redbag-push-latest.ipynb**`
+
+{blank}
+
+And execute it by selecting from the menu:
+
+* *Run* -> *Run All Cells*
++
+[NOTE]
+--
+The upper right corner shows a progress wheel. Wait until finished (idle state):
+
+image::images/11-ai-notebook-wheel.png[width=40%]
+--
++
+{blank}
+
+The last cell output should show the following logs indicating version 2 has been uploaded:
+
+[subs="verbatim,quotes"]
 ----
+models/*redbag*/*2*/fingerprint.pb
+models/*redbag*/*2*/saved_model.pb
+models/*redbag*/*2*/variables/variables.index
+models/*redbag*/*2*/variables/variables.data-00000-of-00001
+---- 
+
+{empty} +
+
+=== Test v2 with an inference request
+
+As we did with our previous banana test, except this time using a sample image of a green tea bag, we'd like to send an inference request via `curl`.
+
+The diagram below describes the test.
+
+image::images/20-ai-curl-test-tea.png[width=80%,align=center]
+
+{blank}
+
+Let's run the test from JupyterLab's terminal and reuse the shell script.
+
+Copy/paste and execute the following command:
+
+[source,console]
+--
+./infer.sh
+--
+
+{blank}
+
+You will probably be disappointed to see the inference result is not predicting _Green Tea_, but instead:
+
+----
+{
+  "predictions": [
+    "other",
+    "0.862245"
+  ]
+}
+----
+
+{blank}
+
+Of course! +
+The script needs to be updated to read, not the banana image, but the green tea image.
+
+Edit the script ensuring the image loaded is `bali-tea`, as shown below:
+
+----
+image=./samples/bali-tea.jpeg
+# image=./samples/banana.jpeg
+----
+
+{blank}
+
+Then try again. You should obtain this time the following result:
+
+----
+{
+  "predictions": [
+    "tea-green",
+    "0.592239"
+  ]
+}
+----
+
+{blank}
 
 {empty} +
 
 [type=verification]
-Did you obtain the same JSON response as shown above?
+Did your test predicted `tea-green`?
 
 [type=verificationSuccess]
-You've successfully invoked the simple service as an external client !!
+Congratulations, you've created a custom AI model !!
 
 [type=verificationFail]
-Inspect in the stub logs to investigate possible causes of failure.
+Review the steps in this exercise to try to understand the point cause of failure, then retry.
 
 {empty} +
 
 
+
+[time=1]
+[id="section-six"]
+== Clean up your namespace
+
+
+kamel run -t knative-service.enabled=false --resource price-catalogue.json price.yaml
 
 
 [time=1]
