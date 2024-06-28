@@ -201,7 +201,7 @@ Review the instructions and try to spot where you might have deviated.
 
 [time=3]
 [id="section-two"]
-== Execute an inference using a base model
+== Execute an inference
 
 In this section of the tutorial you'll run, from _JupyterLab_, a _Notebook_ containing code which loads an AI model and runs an inference (prediction) against it.
 
@@ -430,7 +430,8 @@ Inspect in the cell outputs to investigate the possible causes of failure.
 
 [time=3]
 [id="section-four"]
-== Run a Model Server
+== Deploy v1 in a Model Server
+// == Deploy v1 to a Model Server
 
 The previous task showed how to hide tensor complexity and expose it as an easy to consume interface.
 
@@ -456,6 +457,10 @@ The next set of actions will help you to:
 You will operate from VS Code in _DevSpaces_ to deploy what's needed.
 
 Switch back to your _DevSpaces_ tab in your browser.
+
+image::images/21-ai-at-devspaces.png[width=20%]
+
+{blank}
 
 You can inspect the YAML source you will deploy if you open in your editor the following file:
 
@@ -492,7 +497,11 @@ route.route.openshift.io/minio-ui created
 
 {empty} +
 
-Now, from your OpenShift console's _Topology_ view, find Minio's deployment.
+Now, switch to your console's _Topology_ view tab in your browser.
+
+image::images/22-ai-at-topology-view.png[width=20%]
+
+{blank}
 
 [NOTE]
 --
@@ -500,6 +509,8 @@ If you don't have the _OpenShift_ console open in a browser tab, click the searc
 
 image::images/01-open-openshift-console.png[width=60%]
 --
+
+In your OpenShift console, find _Minio_'s deployment.
 
 You need to create an S3 bucket. +
 Use Minio's UI to do so, follow the instructions below.
@@ -524,6 +535,10 @@ Now that your S3 bucket is ready, you can push your model into the bucket.
 === Push model to S3
 
 Switch to your _JupyterLab_ environment.
+
+image::images/23-ai-at-jupyterlab.png[width=20%]
+
+{blank}
 
 Find and open the following Notebook definition:
 
@@ -576,6 +591,10 @@ We choose to use a _TensorFlow Model Server_ because its interface allows sendin
 
 Switch to your _DevSpaces_ tab in your browser.
 
+image::images/21-ai-at-devspaces.png[width=20%]
+
+{blank}
+
 Inspect the following YAML source in your VS Code editor:
 
 * deploy -> `**tensorflow.yaml**` 
@@ -605,7 +624,13 @@ route.route.openshift.io/tf-server created
 
 The model server is configured to connect to _Minio_ and will try to read the bucket `production` to find models to serve. It will find our model `redbag v1` and will load it in memory and get ready to serve inference requests.
 
-From the topology view, follow the steps below to visually validate your server started successfully:
+Switch to your _Topology_ view tab in your browser.
+
+image::images/22-ai-at-topology-view.png[width=20%]
+
+{blank}
+
+Follow the steps below to visually validate your server started successfully:
 
 . Click on the `tf-server` deployment
 . Click on the view logs link.
@@ -633,7 +658,7 @@ Double check you followed the instructions as documented and try again.
 
 [time=3]
 [id="section-test-model-server"]
-== Send an inference request to the Model Server
+== Use the API to send an inference request
 
 When the server starts and reads the model from S3, it automatically exposes a JSON interface that maps inputs and outputs to/from the signatures defined in the model.
 
@@ -648,7 +673,13 @@ image::images/16-ai-curl-test-banana.png[width=80%,align=center]
 In the picture above, `curl` loads the same picture we've been using all along, and produces a JSON request with the Base64 encoded image. The server handles the request, executes the inference and returns the result, in JSON format.
 
 Let's run the test. +
-Switch back to the _JupyterLab_ environment and inspect the following resource:
+Switch to your _JupyterLab_ environment.
+
+image::images/23-ai-at-jupyterlab.png[width=20%]
+
+{blank}
+
+Inspect the following resource:
 
 * redbag-ai -> workbench -> `**infer.sh**`
 
@@ -802,7 +833,20 @@ The last executed cell puts the new model to the test with a test image, using g
 
 {empty} +
 
-=== Push v2 to production
+
+[type=verification]
+Did you obtain `tea-green` as the predicted result?
+
+[type=verificationSuccess]
+You've successfully created a custom model, now ready to be pushed to 'production' !!
+
+[type=verificationFail]
+Review the lab instructions and try again.
+
+
+[time=4]
+[id="section-v2-production"]
+== Deploy v2 to the Model Server
 
 Now that version 2 is ready, push it to the `production` S3 bucket.
 
@@ -902,10 +946,10 @@ Then try again. You should obtain this time the following result:
 Did your test predicted `tea-green`?
 
 [type=verificationSuccess]
-Congratulations, you've created a custom AI model !!
+Congratulations, you've created, deployed and test a custom AI model !!
 
 [type=verificationFail]
-Review the steps in this exercise to try to understand the point cause of failure, then retry.
+Review the steps in this exercise to identify the cause for failure, and try again.
 
 {empty} +
 
@@ -913,8 +957,30 @@ Review the steps in this exercise to try to understand the point cause of failur
 
 [time=1]
 [id="section-six"]
-== Clean up your namespace
+== Create an AI-enabled Application
 
+We've covered so far the basics of creating, deploying and consuming AI/ML models, tailored (customised) for the needs of your organisation.
+
+However, organisations rarely expose raw AI results to external consumers. They generally need AI as building blocks to create AI-enabled services.
+
+To follow on that need, we will build and deploy a basic application to demonstrate how to expose an API that utilises AI behind the scenes.
+
+NOTE: This task does not intent to show you how an application needs to be built, but rather show an example of putting in place the last piece to expose a service to the outside world.
+
+The use case is simple, to provide a price tag for a product. The client sends an image of a product, and the API resolves it by responding with its price tag.
+
+The illustration below describes the process:
+
+image::images/24-ai-app-flow.png[width=80%,align=center]
+
+{blank}
+
+In the picture above a smart app (in a phone/tablet/browser) consumes the _Price API_. The server application is responsible to run the inference, and based on the result, find the matching price tag from its in-memory product catalogue.
+
+NOTE: We use _Apache Camel_ to implement the _Price API_. _Apache Camel_ provides the means to create the application with minimal effort and easy readability for learners.
+
+
+Smart apps consume the 
 
 kamel run -t knative-service.enabled=false --resource price-catalogue.json price.yaml
 

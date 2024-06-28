@@ -1,1 +1,3 @@
-kamel run -t knative-service.enabled=false --resource price-catalogue.json price.yaml
+kamel run price.yaml \
+-t knative-service.enabled=false \
+--resource file:price-catalogue.json
