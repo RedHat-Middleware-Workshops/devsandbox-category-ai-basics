@@ -1,34 +1,37 @@
 - route:
+    id: Price-API
     from:
+      description: API listener
       uri: platform-http:/price
       steps:
         - removeHeaders:
+            description: Clean Headers
             pattern: "*"
         - to:
+            description: Infer Server
             uri: http://tf-server:8501/v1/models/redbag:predict
-        
         - unmarshal:
+            description: Json to Object
             json: {}
-        
         - setHeader:
+            description: Get Product
             name: product
             expression:
               simple:
                 expression: ${body[predictions][0]}
-        
         - to:
+            description: Read Catalog
             uri: language:constant:resource:classpath:price-catalogue.json
-        
         - setBody:
+            description: Query Catalog
             expression:
               jq:
                 expression: .[] | select(.item == header("product")).price
                 resultType: String
-        
         - setBody:
+            description: Set Response
             expression:
               simple:
                 expression: '{"price": "${body}"}'
-        
         - log:
             message: result is ${body}

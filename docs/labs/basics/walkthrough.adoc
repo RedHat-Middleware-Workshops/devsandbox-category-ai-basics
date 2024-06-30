@@ -979,11 +979,91 @@ In the picture above a smart app (in a phone/tablet/browser) consumes the _Price
 
 NOTE: We use _Apache Camel_ to implement the _Price API_. _Apache Camel_ provides the means to create the application with minimal effort and easy readability for learners.
 
+{empty} +
 
-Smart apps consume the 
+=== Application overview
 
-kamel run -t knative-service.enabled=false --resource price-catalogue.json price.yaml
+Let's have a look to the implementation of the _Price API_
 
+Switch to your _DevSpaces_ browser tab.
+
+image::images/21-ai-at-devspaces.png[width=20%]
+
+{blank}
+
+The first resource you can look at is the _Price Catalogue_ containing price tags for different types of tea (the products). When a detection is obtained from the model, the application will query the catalogue to find its price tag.
+
+Open in your editor the following file:
+
+* camel -> `**price-catalogue.json**` 
++
+{blank}
+
+The relevant part of our test is the following:
+
+[,json]
+----
+[
+    ...
+
+    {
+      "item": "tea-green",
+      "label": "Green Tea",
+      "price": 2.99
+    },
+
+    ...
+]
+----
+
+{blank}
+
+Now, open the application definition with the _Kaoto Graphical Editor_.
+
+NOTE: Your _VS Code_ environment has been provisioned with the _Kaoto Graphical Editor_ extension. It allows you to visualise and graphically edit _Camel_ definitions with point-n-click.
+
+Follow the actions below illustrated:
+
+. Right click on the source code file:
+- camel -> `**price.yaml**` 
++
+{blank}
+
+. Select the option
+- Open with _Kaoto Graphical Editor for Camel_
++
+{blank}
+
+. The process displays vertically by default
++
+--
+- Click the *_Horizontal Layout_* for left-to-right reading.
+--
+
+{blank}
+
+image::images/25-ai-kaoto-route.png[]
+
+{blank}
+
+Process above is easily readable. These are the highlights:
+
+. The _HTTP_ listener serves the request
+. After cleaning incoming headers, the process invokes the _Model Server_
+. For convenience, the JSON response is converted to an object.
+. The product name is extracted from the prediction
+. The Price Catalogue is loaded
+. A query against the catalogue extracts the price tag
+. The response payload for the client is prepared
++
+NOTE: _Apache Camel_ automatically uses the _Body_ (from last activity) to respond to the client.
+
+{empty} +
+
+If you feel curious about the source code YAML for the above _Apache Camel_ route, you can also open the file with a single mouse click. The YAML view is easy to read and describes the process in a friendly manner.
+
+
+{empty} +
 
 [time=1]
 [id="section-six"]
