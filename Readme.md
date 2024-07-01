@@ -1,8 +1,19 @@
-# Category tutorials for the Developer Sandbox
+# AI Basics in the Developer Sandbox
 
-> **Note**<br>
-This content was auto-generated from a git template. \
-Update its contents accordingly.
+Build, deploy, test your own AI/ML model with OpenShift AI, and integrate with an Apache Camel application using OpenShift Dev Spaces in the Developer Sandbox.
+
+## Get started with the tutorial
+
+To launch this tutorial, you only need 2 steps:
+
+1. If you haven't already, click the link below to provision the tutorial:
+
+    [Provision Tutorial in the Developer Sandbox](https://workspaces.openshift.com/#https://github.com/RedHat-Middleware-Workshops/devsandbox-catalog-ai-labs.git)
+
+<br/>
+
+2. Once provisioned, from VS Code in DevSpaces, unfold the `ENDPOINTS` group in the left panel, and open the `Tutorial` documentation to get started, as per the picture below:
+
 
 ## Introduction
 
