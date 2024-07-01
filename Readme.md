@@ -15,10 +15,10 @@ To launch this tutorial, you only need 2 steps:
 
     <!-- <a target="_blank" href="https://workspaces.openshift.com/#https://github.com/RedHat-Middleware-Workshops/devsandbox-catalog-ai-labs.git">Provision Tutorial in the Developer Sandbox</a> -->
 
-2. Once provisioned, from VS Code in DevSpaces, unfold the `ENDPOINTS` group in the left panel, and open the `Tutorial` documentation to get started, as per the picture below:
+2. Once provisioned, from VS Code in DevSpaces, unfold the `ENDPOINTS` group in the left panel, and open the `Tutorial` documentation to get started, as per the actions in the picture below:
 
-    ![My Test Image](docs/labs/basics/images/01-open-openshift-console.png)
-*My Test Image*
+    ![](docs/labs/basics/images/29-ai-open-tutorial.png)
+    *Mouse actions in VS Code to open the tutorial.*
 
 <br/>
 
