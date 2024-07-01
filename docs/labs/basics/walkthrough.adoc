@@ -989,7 +989,19 @@ Switch to your _DevSpaces_ browser tab.
 
 image::images/21-ai-at-devspaces.png[width=20%]
 
-{blank}
+{empty} +
+
+This application only needs 2 files:
+
+- A Price Catalogue containing product information
++
+📁 `camel/price-catalogue.json`
+
+- The process definition (_Camel_ route)
++
+📁 `camel/price.yaml`
+
+{empty} +
 
 The first resource you can look at is the _Price Catalogue_ containing price tags for different types of tea (the products). When a detection is obtained from the model, the application will query the catalogue to find its price tag.
 
@@ -998,25 +1010,22 @@ Open in your editor the following file:
 * camel -> `**price-catalogue.json**` 
 +
 {blank}
-
-The relevant part of our test is the following:
-
++
+Inside, you'll find the product data relevant for our test:
++
 [,json]
 ----
-[
-    ...
-
+[   ...
     {
       "item": "tea-green",
       "label": "Green Tea",
       "price": 2.99
     },
-
     ...
 ]
 ----
 
-{blank}
+{empty} +
 
 Now, open the application definition with the _Kaoto Graphical Editor_.
 
@@ -1029,7 +1038,7 @@ Follow the actions below illustrated:
 +
 {blank}
 
-. Select the option
+. From the options displayed, select:
 - Open with _Kaoto Graphical Editor for Camel_
 +
 {blank}
@@ -1046,21 +1055,106 @@ image::images/25-ai-kaoto-route.png[]
 
 {blank}
 
-Process above is easily readable. These are the highlights:
+The process above is easy to read, these are the highlights:
 
-. The _HTTP_ listener serves the request
-. After cleaning incoming headers, the process invokes the _Model Server_
+. The HTTP (_API_) listener serves the request.
+. After cleaning incoming headers, the process invokes the _Model Server_ (_Infer Server_).
++
+NOTE: The invocation is pass-through, meaning the same image data that came in, is forwarded to the model server
 . For convenience, the JSON response is converted to an object.
-. The product name is extracted from the prediction
-. The Price Catalogue is loaded
-. A query against the catalogue extracts the price tag
-. The response payload for the client is prepared
+. The product name is extracted from the prediction.
+. The Price Catalogue is loaded.
+. A query against the catalogue extracts the price tag.
+. The response payload for the client is prepared.
 +
 NOTE: _Apache Camel_ automatically uses the _Body_ (from last activity) to respond to the client.
 
 {empty} +
 
-If you feel curious about the source code YAML for the above _Apache Camel_ route, you can also open the file with a single mouse click. The YAML view is easy to read and describes the process in a friendly manner.
+The _Camel_ route definition is coded in YAML, also easy to read and follow through. You can explore its source code by opening the file from your _VS Code_ explorer with a single mouse click.
+
+{empty} +
+
+=== Deploy the application
+
+Let's deploy the process flow.
+
+Run in your VS Code terminal the following commands:
+
+. Change directory:
++
+[source,console]
+--
+cd /projects/ai-basics/camel
+--
++
+{blank}
+
+. Deploy with:
++
+[source,console]
+--
+./deploy.sh
+--
+
+{empty} +
+
+
+=== Test the application
+
+Switch to your _JupyterLab_ environment.
+
+image::images/23-ai-at-jupyterlab.png[width=20%]
+
+{blank}
+
+Remember the `infer.sh` script uses the model server as the endpoint to invoke. However, now we want to use the new _Price API_ instead.
+
+
+Open the script in the editor (if not already open):
+
+* redbag-ai -> workbench -> `**infer.sh**`
+
+{empty} +
+
+Update the script's server configuration to point to the new API service:
+
+. Comment out the _TensorFlow Server_ endpoint
+. Uncomment the _Camel Application Server_ configuration.
++
+{blank}
++
+Make sure your configuration looks like:
++
+----
+# TensorFlow Server
+# server=http://tf-server:8501/v1/models/redbag:predict
+
+# Camel Application Server
+server=http://price:80/price
+----
+
+{empty} +
+
+
+Now, from JupyterLab's terminal, execute the following command:
+
+[source,console]
+----
+./infer.sh
+----
+
+{blank}
+
+This time, instead of getting back a prediction response, you should get the price tag of the product (in image) you sent:
+
+----
+{
+  "price": "2.99"
+}
+----
+
+{blank}
 
 
 {empty} +
