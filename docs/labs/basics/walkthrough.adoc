@@ -13,9 +13,12 @@ ifdef::env-github[]
 endif::[]
 
 [id='lab-intro']
-= AI basics - Lab1
+= AI basics - Lab
 
-Explore, build, test and deploy a Camel X demo application using the Developer Sandbox and OpenShift Dev Spaces.
+// Explore, build, test and deploy a Camel X demo application using the Developer Sandbox and OpenShift Dev Spaces.
+
+Build, deploy & test your model with OpenShift AI, and integrate with Apache Camel using OpenShift Dev Spaces in the Developer Sandbox.
+
 
 Start your AI journey by learning the very basics of creating, deploying, and invoking a model.
 
@@ -956,7 +959,7 @@ Review the steps in this exercise to identify the cause for failure, and try aga
 
 
 [time=1]
-[id="section-six"]
+[id="section-create-app"]
 == Create an AI-enabled Application
 
 We've covered so far the basics of creating, deploying and consuming AI/ML models, tailored (customised) for the needs of your organisation.
