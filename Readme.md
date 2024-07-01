@@ -4,13 +4,18 @@ Build, deploy, test your own *AI/ML* model with *OpenShift AI*, and integrate wi
 
 ## Get started with the tutorial
 
+> [!NOTE]  
+> If using the Developer Sandbox for the first time, you'll be required to register for a Red Hat account.
+
 To launch this tutorial, you only need 2 steps:
+
+<br/>
 
 1. If you haven't already, click the link below to provision the tutorial:
 
-    <!-- [Provision Tutorial in the Developer Sandbox](https://workspaces.openshift.com/#https://github.com/RedHat-Middleware-Workshops/devsandbox-catalog-ai-labs.git){:target="_blank" rel="noopener"} -->
+    [Provision Tutorial in the Developer Sandbox](https://workspaces.openshift.com/#https://github.com/RedHat-Middleware-Workshops/devsandbox-catalog-ai-labs.git)
 
-    <a target="_blank" href="https://workspaces.openshift.com/#https://github.com/RedHat-Middleware-Workshops/devsandbox-catalog-ai-labs.git">Provision Tutorial in the Developer Sandbox</a>
+    <!-- <a target="_blank" href="https://workspaces.openshift.com/#https://github.com/RedHat-Middleware-Workshops/devsandbox-catalog-ai-labs.git">Provision Tutorial in the Developer Sandbox</a> -->
 
 <br/>
 
