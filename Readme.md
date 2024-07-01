@@ -10,7 +10,7 @@ To launch this tutorial, you only need 2 steps:
 
     <!-- [Provision Tutorial in the Developer Sandbox](https://workspaces.openshift.com/#https://github.com/RedHat-Middleware-Workshops/devsandbox-catalog-ai-labs.git){:target="_blank" rel="noopener"} -->
 
-    <a target="_blank" href="[your link here](https://workspaces.openshift.com/#https://github.com/RedHat-Middleware-Workshops/devsandbox-catalog-ai-labs.git)">Provision Tutorial in the Developer Sandbox</a>
+    <a target="_blank" href="https://workspaces.openshift.com/#https://github.com/RedHat-Middleware-Workshops/devsandbox-catalog-ai-labs.git">Provision Tutorial in the Developer Sandbox</a>
 
 <br/>
 
