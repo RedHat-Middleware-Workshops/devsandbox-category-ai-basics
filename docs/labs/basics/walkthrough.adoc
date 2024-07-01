@@ -1154,7 +1154,18 @@ This time, instead of getting back a prediction response, you should get the pri
 }
 ----
 
-{blank}
+{empty} +
+
+[type=verification]
+Did you get the price tag configured for green tea?
+
+[type=verificationSuccess]
+Congratulations, you've created, deployed and tested the _Price API_ application !!
+
+[type=verificationFail]
+Review the steps in this exercise to identify the cause for failure, and try again.
+
+{empty} +
 
 
 {empty} +
@@ -1163,16 +1174,78 @@ This time, instead of getting back a prediction response, you should get the pri
 [id="section-six"]
 == Clean up your namespace
 
-When you're done playing in the _Developer Sandbox_, you can clean up your Sandbox namespace by un-deploying your Camel `simple` service and stub `end1` using the following _Maven_ `oc:undeploy` command for both:
+When you're done playing in the _Developer Sandbox_, we recommend deleting all the deployments and artifacts, to free up your namespace, and try out other tutorials or products in the future.
 
-[source, subs=]
-----
-mvn oc:undeploy -Popenshift -s configuration/settings.xml<br>
-----
+These are in summary the components to delete:
+
+ - Deployed applications and components (_TensorFlow Server_, _Minio_, _Camel_)
+ - OpenShift AI workbench and cluster storage.
+ - DevSpaces workspace.
+
+{empty} +
+
+=== Delete deployed components
+
+If not there yet, switch to your _DevSpaces_ browser tab.
+
+image::images/21-ai-at-devspaces.png[width=20%]
 
 {blank}
 
-Executing the command above for both services should leave your topology view clean from routes, services, and other Kubernetes artifacts in your namespace.
+And from the terminal, execute:
+
+[source,console]
+----
+/projects/ai-basics/deploy/clean.sh
+----
+
+
+{empty} +
+
+=== Delete OpenShift AI components
+
+Switch to your _OpenShift AI_ browser tab.
+
+image::images/26-ai-at-openshiftai.png[width=20%]
+
+{blank}
+
+And follow the steps indicated below:
+
+. Click *_Data Science Projects_*, from the left menu.
+. Select your project (namespace).
+. Click the tab *_Workbenches_*.
+. Click the 3-dots button (as shown below)
+. Click *_Delete workbench_*.
+. Click the tab *_Cluster storage_*
+. Click the 3-dots button (as shown below)
+. Click *_Delete storage_*.
++
+{blank}
++
+image::images/27-ai-clean-openshiftai.png[]
+
+
+{empty} +
+
+=== Delete DevSpaces workspace
+
+Finally, Switch to your _DevSpaces_ dashboard tab.
+
+image::images/21-ai-at-devspaces.png[width=20%]
+
+{blank}
+
+And follow the steps indicated below:
+
+. Click *_Workspaces_*, from the left menu.
+. Tick the checkbox for `devsandbox-catalog-ai-labs`.
+. Click the button `pass:[<mark style="background-color: navy; color: white">&nbsp;Delete&nbsp;</mark>]`.
++
+{blank}
++
+image::images/28-ai-clean-devspaces.png[width=60%]
+
 
 {empty} +
 
