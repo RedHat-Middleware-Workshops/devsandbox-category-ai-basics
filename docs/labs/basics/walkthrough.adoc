@@ -28,13 +28,14 @@ This hands-on lab is based on the following blog article in Red Hat Developers:
 
 {empty} +
 
-Assuming you have followed the article's instructions, you should be all set to get hands-on with the basics of AI to build applications in the _OpenShift Dev Spaces_ workspace.
 
-For illustration purposes, the picture below shows what the integration end-to-end flow looks like.
+For illustration purposes, the picture below shows what the end-to-end processing flow you will build, piece by piece.
 
-// image::images/00-demo-end2end.png[align="center", width=80%]
+image::images/00-intro-end2end.png[align="center", width=60%]
 
-A client invokes an OpenApi service. A _Camel_ route attends the call, translates the JSON input into XML and calls a backend service to obtain an XML response, then it's translated back to JSON before responding to the original service call.
+{blank}
+
+You'll train and deploy a customised model, and front it with an (_Apache Camel_) AI-enabled service, serving pricing information for products.
 
 {empty} +
 
