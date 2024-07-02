@@ -1,5 +1,5 @@
 > [!NOTE]  
-> If this file is rendered in TEXT mode in VS Code, click the preview. button \
+> If this file is rendered in TEXT mode in VS Code, click the preview button. \
 > (upper-left corner, has a `📖+🔍` symbol)
 
 # AI Basics in the Developer Sandbox
