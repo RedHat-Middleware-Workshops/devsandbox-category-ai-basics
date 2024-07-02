@@ -1,3 +1,7 @@
+> [!NOTE]  
+> If this file is rendered in TEXT mode in VS Code, click the preview. button \
+> (upper-left corner, has a `📖+🔍` symbol)
+
 # AI Basics in the Developer Sandbox
 
 Build, deploy, test your own *AI/ML* model with *OpenShift AI*, and integrate with an *Apache Camel* application using *OpenShift Dev Spaces* in the *Developer Sandbox*.
@@ -9,13 +13,16 @@ Build, deploy, test your own *AI/ML* model with *OpenShift AI*, and integrate wi
 
 To launch this tutorial, you only need 2 steps:
 
-1. If you haven't already, click the link below to provision the tutorial:
+1. If you haven't already done so, click the link below to provision the tutorial:
 
+    <sub>(right-click & open in new tab)</sub> \
     [Provision Tutorial in the Developer Sandbox](https://workspaces.openshift.com/#https://github.com/RedHat-Middleware-Workshops/devsandbox-catalog-ai-labs.git)
-
     <!-- <a target="_blank" href="https://workspaces.openshift.com/#https://github.com/RedHat-Middleware-Workshops/devsandbox-catalog-ai-labs.git">Provision Tutorial in the Developer Sandbox</a> -->
 
-2. Once provisioned, from VS Code in DevSpaces, unfold the `ENDPOINTS` group in the left panel, and open the `Tutorial` documentation to get started, as per the actions in the picture below:
+2. <sub>(In VS Code, open `Readme.md` in preview mode, if not showing automatically)</sub>
+
+
+    Once provisioned, from VS Code in DevSpaces, unfold the `ENDPOINTS` group in the left panel, and open the `Tutorial` documentation to get started, as per the actions in the picture below:
 
     ![](docs/labs/basics/images/29-ai-open-tutorial.png)
     *Mouse actions in VS Code to open the tutorial.*
