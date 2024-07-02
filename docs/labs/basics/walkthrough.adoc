@@ -42,7 +42,7 @@ You'll train and deploy a customised model, and front it with an (_Apache Camel_
 {empty} +
 
 
-[time=1]
+[time=2]
 [id="section-one"]
 == Create an OpenShift AI workbench
 
@@ -205,7 +205,7 @@ Review the instructions and try to spot where you might have deviated.
 
 {empty} +
 
-[time=3]
+[time=2]
 [id="section-two"]
 == Execute an inference
 
@@ -434,7 +434,7 @@ Well done, you're ready to deploy this model !!
 Inspect in the cell outputs to investigate the possible causes of failure.
 
 
-[time=3]
+[time=5]
 [id="section-four"]
 == Deploy v1 in a Model Server
 // == Deploy v1 to a Model Server
@@ -662,7 +662,7 @@ Well done, you're ready to test the model !!
 Double check you followed the instructions as documented and try again.
  
 
-[time=3]
+[time=1]
 [id="section-test-model-server"]
 == Use the API to send an inference request
 
@@ -742,7 +742,7 @@ You've successfully run an inference against the Model Server !!
 Review the lab instructions and try again.
 
 
-[time=4]
+[time=5]
 [id="section-five"]
 == Retrain the model with a custom data set
 
@@ -850,7 +850,7 @@ You've successfully created a custom model, now ready to be pushed to 'productio
 Review the lab instructions and try again.
 
 
-[time=4]
+[time=1]
 [id="section-v2-production"]
 == Deploy v2 to the Model Server
 
@@ -961,7 +961,7 @@ Review the steps in this exercise to identify the cause for failure, and try aga
 
 
 
-[time=1]
+[time=3]
 [id="section-create-app"]
 == Create an AI-enabled Application
 
