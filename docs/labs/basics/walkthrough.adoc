@@ -6,6 +6,8 @@
 
 :article-url: https://developers.redhat.com/articles/2023/08/15/some-article-url
 
+:sp-article-url: https://developers.redhat.com/articles/2024/05/24/implement-ai-driven-edge-core-data-pipelines
+
 // :btn-text: my text
 // :btn: pass:attributes[<code><mark style="background-color: dodgerblue; color: white">&nbsp;{btn-text}&nbsp;</mark>]
 
@@ -1161,7 +1163,7 @@ This time, instead of getting back a prediction response, you should get the pri
 {empty} +
 
 [type=verification]
-Did you get the price tag configured for green tea?
+Did you get a price response matching the configuration for _Green Tea_?
 
 [type=verificationSuccess]
 Congratulations, you've created, deployed and tested the _Price API_ application !!
@@ -1169,13 +1171,41 @@ Congratulations, you've created, deployed and tested the _Price API_ application
 [type=verificationFail]
 Review the steps in this exercise to identify the cause for failure, and try again.
 
-{empty} +
 
 
 {empty} +
 
 [time=1]
-[id="section-six"]
+[id="section-learn"]
+== Take the solution further ahead
+
+{empty} +
+
+=== 👏 👏 👏 Congratulations for getting this far 👏 👏 👏
+
+{empty} +
+
+What you have learnt today with this tutorial is based on material created to build an AI based _Solution Pattern_. 
+
+We call it:
+
+* link:{sp-article-url}[Edge to Core Data Pipelines for AI/ML,window="_blank", , id="rhd-source-article"]
+
+{empty} +
+
+To learn more about it, follow the link above to find an introduction to the solution pattern and a video demonstration.
+
+If you dive into the pattern, specially after completing this tutorial, you'll find yourself very familiar with its content. The solution pattern goes further ahead and takes the use case to another level showing how to automate the platform to constantly evolve to follow the needs of an organisation.
+
+image::images/31-ai-solution-pattern.png[align=center,width=70%]
+
+
+WARNING: Before you go, please make sure you clean your sandbox namespace to free up resources. +
+Click `pass:[<mark style="background-color: dodgerblue; color: white">&nbsp;Next&nbsp;</mark>]` for detailed instructions.
+
+
+[time=1]
+[id="section-clean"]
 == Clean up your namespace
 
 When you're done playing in the _Developer Sandbox_, we recommend deleting all the deployments and artifacts, to free up your namespace, and try out other tutorials or products in the future.
@@ -1232,7 +1262,7 @@ image::images/27-ai-clean-openshiftai.png[]
 
 {empty} +
 
-=== Delete DevSpaces workspace
+=== Delete workspace in Dev Spaces 
 
 Finally, Switch to your _DevSpaces_ dashboard tab.
 
@@ -1260,6 +1290,6 @@ Is your namespace clean from artifacts?
 You've successfully cleaned up your namespace !!
 
 [type=verificationFail]
-Inspect in the stub logs to investigate possible causes of failure.
+Review the instructions in this chapter and try again.
 
 {empty} +
