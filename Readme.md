@@ -36,7 +36,4 @@ This repository contains a collection of labs runnable in the _Developer Sandbox
 
 The following article in _Red Hat Developers_ guides readers on how to get started to enjoy the learning material in the _Developer Sandbox_.
 
-* https://developers.redhat.com/pending-to-update-url
-
-    > **Note**<br>
-    When creating a new category it is most recommended to author an article in _Red Hat Developers_ to promote the new collection.
+* [​​Try OpenShift AI and integrate with Apache Camel](https://developers.redhat.com/pending-to-update-url)

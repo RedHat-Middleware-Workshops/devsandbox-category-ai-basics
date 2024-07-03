@@ -809,6 +809,8 @@ The notebook contains similar code compared to previous exercises, but includes 
 * Train the model
 * Retrain with _Data Augmentation_ (synthetic data)
 
+{blank}
+
 You'll also find typical data science blocks to render sample data and plot loss/accuracy graphs, to name a couple.
 
 Execute the code by selecting from the menu:
