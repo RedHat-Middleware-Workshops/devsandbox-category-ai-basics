@@ -4,7 +4,7 @@
 
 :experimental:
 
-:article-url: https://developers.redhat.com/articles/2023/08/15/some-article-url
+:article-url: https://developers.redhat.com/articles/2024/07/22/try-openshift-ai-and-integrate-apache-camel
 
 :sp-article-url: https://developers.redhat.com/articles/2024/05/24/implement-ai-driven-edge-core-data-pipelines
 
