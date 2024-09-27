@@ -481,6 +481,15 @@ The definition contains everything needed to deploy and access the Minio (S3) se
 image::images/12-ai-devspaces-open-terminal.png[width=40%]
 +
 {blank}
++
+You will be prompted at the top of the window to select the working directory. +
+Select:
++
+- `ai-basics [.small]#/projects#`
++
+image::images/30-ai-choose-project.png[width=50%]
++
+{empty} +
 
 . Execute the following command:
 +

@@ -22,10 +22,33 @@ To launch this tutorial, you only need 2 steps:
 2. <sub>(In VS Code, open `Readme.md` in preview mode, if not showing automatically)</sub>
 
 
-    Once provisioned, from VS Code in DevSpaces, unfold the `ENDPOINTS` group in the left panel, and open the `Tutorial` documentation to get started, as per the actions in the picture below:
+    Once provisioned, from VS Code in DevSpaces, unfold the `ENDPOINTS` group in the left panel, open the `Tutorial` documentation and make sure you choose the `AI-basics - Lab` tile to get started, as per the actions in the picture below:
 
     ![](docs/labs/basics/images/29-ai-open-tutorial.png)
     *Mouse actions in VS Code to open the tutorial.*
+
+<br/>
+
+### How to recover from failed workspace
+
+Sometimes the provisioning process goes wrong. \
+Try following the steps below to delete the failed workspace and restart.
+
+1. Click <span style="color:blue">Workspaces</span> at the top of the screen as illustrated below. \
+   *Dev Spaces*'s dashboard will open.
+  
+2. Find the <kbd>⋮</kbd> button (failed workspace).
+
+3. Select <kbd>Delete Workspace</kbd>
+
+4. In the confirmation panel, **tick** the box, and click **Delete**
+
+![](docs/labs/basics/images/35-recover-workspace.png)
+*Mouse actions in VS Code to delete failed workspace.*
+
+After the actions above, retry provisioning your lab. \
+Jump back to:
+ - [Get started with the tutorial](#get-started-with-the-tutorial)
 
 <br/>
 
