@@ -468,9 +468,23 @@ image::images/21-ai-at-devspaces.png[width=20%]
 
 {blank}
 
+Start by folding unrelated content
+
+The workspace contains multiple labs (projects). +
+Make sure you fold unrelated content. You should just work on the following folder (project):
+
+- `ai-basics`
++
+{blank}
++
+image::images/32-ai-folder-ai-basics.png[width=50%]
+
+{empty} +
+
+
 You can inspect the YAML source you will deploy if you open in your editor the following file:
 
-* deploy -> `**minio.yaml**` 
+* ai-basics -> deploy -> `**minio.yaml**` 
 +
 {blank}
 
