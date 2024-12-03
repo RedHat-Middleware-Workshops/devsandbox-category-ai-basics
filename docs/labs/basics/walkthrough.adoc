@@ -1251,7 +1251,16 @@ image::images/21-ai-at-devspaces.png[width=20%]
 
 {blank}
 
-And from the terminal, execute:
+To delete the Camel integration, execute from the terminal:
+
+[source,console]
+----
+camel kubernetes delete price
+----
+
+{blank}
+
+To delete Minio and the Model server, execute:
 
 [source,console]
 ----
