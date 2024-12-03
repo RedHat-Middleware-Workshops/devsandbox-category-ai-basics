@@ -733,6 +733,15 @@ image::images/17-ai-jupyterlab-terminal.png[width=60%]
 
 {empty} +
 
+Ensure you are in the right directory:
+
+[source,console]
+--
+cd /opt/app-root/src/redbag-ai/workbench
+--
+
+{blank}
+
 Copy/paste and execute the following command on your terminal:
 
 [source,console]
