@@ -98,7 +98,7 @@ Now, enter the following field values to create your AI workbench.
 
 - Name: `wb`
 - Notebook image -> Image selection: `TensorFlow`
-- Notebook image -> Version selection: `pass:[<mark style="background-color: yellow">2024.1</mark>]` pass:[(not <strike>2024.2</strike>)]
+- Notebook image -> Version selection: `pass:[<mark style="background-color: yellow">2024.1</mark>]` pass:[(not <s>2024.2</s>)]
 - Deployment size -> Container size: `Medium`
 +
 [NOTE]
