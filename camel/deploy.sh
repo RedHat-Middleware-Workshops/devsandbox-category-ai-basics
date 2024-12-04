@@ -14,5 +14,4 @@ jbang camel@apache/camel plugin add kubernetes
 # Deploy Camel integration
 camel kubernetes run \
 price.yaml price-catalogue.json \
---cluster-type=openshift \
---trait container.name=price
+--cluster-type=openshift
